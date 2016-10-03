@@ -66,35 +66,68 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Services</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading">Daftar Pesanan</h2>
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">E-Commerce</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Responsive Design</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Web Security</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
+                <table style='width:80%'class='table table-bordered'>
+                    <div>
+                        <tr class='danger'>
+                            <th>No</th>
+                            <th>Nama Menu</th>
+                            <th>Gambar</th>
+                            <th>Jumlah</th>
+                            <th>Status Pesanan</th>
+                            <th>Pembatalan</th>
+                        </tr>
+                        <?php
+                        if (!defined('BASEPATH')) {
+                            exit('No direct script access allowed');
+                        }
+                        $a = $this->db->query("SELECT * FROM pembeli");
+                        $no_urut = 1;
+                        foreach($a->result_array() as $b){
+                        ?>
+                            <tr>
+                                <td><?php echo $no_urut ?></td>
+                                <?php
+                                if (!defined('BASEPATH')) {
+                                    exit('No direct script access allowed');
+                                }
+                                $teks = "SELECT * FROM menu WHERE id_menu='".$b['id_menu']."'";
+                                $anu = $this->db->query($teks);
+                                foreach($anu->result_array() as $c){?>
+                                    <td><?php echo $c['nama_menu']?></td>
+                                    <td><img src ="<?php echo base_url(); ?>assets/gambar/tabel/<?php echo $c['gambar'] ?>"/></td>
+                                <?php } ?>
+                                <td><?php echo $b['jumlah']?></td>
+                                <?php if ($b['status'] == 0) { ?>
+                                    <td>Belum dimasak</td>
+                                <?php } elseif ($b['status'] == 1) { ?>
+                                    <td>Siap dimasak</td>
+                                <?php } elseif ($b['status'] == 2) { ?>
+                                    <td>Sedang dimasak</td>
+                                <?php } elseif ($b['status'] == 3) { ?>
+                                    <td>Siap diantar</td>
+                                <?php } elseif ($b['status'] == 4) { ?>
+                                    <td>Sedang diantar</td>
+                                <?php } elseif ($b['status'] == 5) { ?>
+                                    <td>Selesai diantar</td>
+                                <?php } ?>
+                                <?php echo form_open('Pemesanan/batal', array('name' => 'batal'))?>
+                                    <input type="hidden" name="id_transaksi" value="<?php echo $b['id_transaksi']?>" class="qty"/>
+                                    <?php if ($b['status'] == 0) { ?>
+                                        <td><input type="submit" class="btn btn-primary" name="submit" value="Batalkan"/></td>
+                                    <?php } else { ?>
+                                        <td>Tidak dapat dibatalkan</td>
+                                    <?php } ?>
+                                <?php echo form_close(); ?>
+                            </tr>
+                            <?php $no_urut+=1;
+                        } ?>
+                    </div>
+                </table><br><br>
+                <a href="<?php echo base_url(); ?>pemesanan" class="page-scroll btn btn-xl">Tambah Pesanan</a><a href="<?php echo base_url(); ?>pemesanan" class="page-scroll btn btn-xl">Finalisasi Transaksi</a>
             </div>
         </div>
     </section>

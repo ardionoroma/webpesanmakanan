@@ -42,7 +42,7 @@
             <div class="navbar-header page-scroll">
 
                 <!--Icon di menubar kiri bakal kembali ke home-->
-                <a class="navbar-brand page-scroll" href="<?php echo base_url(); ?>">Kantin SMTI08</a>
+                <a class="navbar-brand page-scroll" href="<?php echo base_url(); ?>#services">SMTI-08 RESTO</a>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -99,7 +99,7 @@
 											<i class="fa fa-plus fa-3x"></i>
 										</div>
 									</div>
-									<img src="img/portfolio/roundicons.png" class="img-responsive" alt="">
+									<img src="<?php echo base_url(); ?>assets/gambar/thumbnail/<?php echo $b['gambar'] ?>" class="img-responsive" alt="">
 								</a>
 								<div class="portfolio-caption">
                                     <!--kalau nilai harga di dbnya 0 tulis gratis-->
@@ -133,7 +133,7 @@
 											<i class="fa fa-plus fa-3x"></i>
 										</div>
 									</div>
-									<img src="img/portfolio/roundicons.png" class="img-responsive" alt="">
+									<img src="<?php echo base_url(); ?>assets/gambar/thumbnail/<?php echo $b['gambar'] ?>" class="img-responsive" alt="">
 								</a>
 								<div class="portfolio-caption">
                                     <!--kalau nilai harga di dbnya 0 tulis gratis-->
@@ -218,7 +218,7 @@
                                 <?php } else { ?>
                                     <p class="item-intro text-muted">Rp <?php echo $b['harga'] ?></p>
                                 <?php } ?>
-                                <img class="img-responsive img-centered" src="img/portfolio/roundicons-free.png" alt="">
+                                <img class="img-responsive img-centered" src="<?php echo base_url(); ?>assets/gambar/ori/<?php echo $b['gambar'] ?>" alt="">
                                 <p><?php echo $b['deskripsi'] ?></p>
 
                                 <!--kumpulan button di popup jadi 1 form u/ memudahkan input ke db pake controller+model, disini bikin form bernama 'myform'+pake function save() dari /controllers/Pemesanan.php-->

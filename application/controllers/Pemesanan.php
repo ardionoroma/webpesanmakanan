@@ -37,6 +37,28 @@ class Pemesanan extends CI_Controller {
         }
 
         //setelah input selesai, kembali ke controller Pemesanan (kembali meload halaman pemesanan)
-        redirect('Pemesanan');
+        if ($this->db->affected_rows() == 1 && substr($this->input->post('kd_menu'),0,2) == 'MK') {
+            echo "<script type='text/javascript'>alert('Pesanan sukses diinput!')</script>";
+            redirect('Pemesanan?menu=Makanan');
+        } elseif ($this->db->affected_rows() == 1 && substr($this->input->post('kd_menu'),0,2) == 'MN') {
+            echo "<script type='text/javascript'>alert('Pesanan sukses diinput!')</script>";
+            redirect('Pemesanan?menu=Minuman');
+        } else {
+            echo "<script type='text/javascript'>alert('Pesanan gagal diinput!')</script>";
+        }
+    }
+
+    function batal() {
+        $this->load->model('insert_model');
+
+        //sumber inputan adalah elemen bernama 'submit' pada form yang memanggil function 'save' ini, pada kasus ini elemennya adalah tombol input bernama submit (ada di /view/pemesanan.php)
+        if ($this->input->post('submit')) {
+            
+            //menjalankan method process() pada /model/insert_model.php
+            $this->insert_model->row_delete($this->input->post('id_transaksi'));
+        }
+
+        //setelah input selesai, kembali ke controller Pemesanan (kembali meload halaman pemesanan)
+        redirect('/#services');
     }
 }

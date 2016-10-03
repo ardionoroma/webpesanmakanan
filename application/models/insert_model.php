@@ -1,9 +1,11 @@
- <?php
+<?php
 	class insert_model extends CI_Model{
 		function process() {
 
             //memanggil method getkodeunik() dari /model/insert_model.php
 			$id_transaksi = $this->insert_model->getkodeunik();
+            $waktu = $this->insert_model->getJam();
+            $no_meja = '01';
 
             //memanggil nilai yang dikandung elemen bernama 'kd_menu' dan 'quantity' pada form yang memanggil method process ini. Dalam kasus ini elemennya adalah input text yang mengandung nilai kode menu dan jumlah menu yang dipesan
 
@@ -15,6 +17,8 @@
 
                 //sebelah kiri itu field-field database yang mau diinsert
 				'id_transaksi'=>$id_transaksi,
+                'waktu'=>$waktu,
+                'no_meja'=>$no_meja,
 				'id_menu'=>$id_menu,
 				'jumlah'=>$jumlah
 				);
@@ -69,5 +73,14 @@
             //kembalikan id_transaksi yang baru digenerate
         	return $NomOt;
    		}
+
+        function getJam() {
+            return date("H:i:s");
+        }
+
+        function row_delete($id) {
+            $this->db->where('id_transaksi', $id);
+            $this->db->delete('pembeli'); 
+        }
 	}
 ?>
