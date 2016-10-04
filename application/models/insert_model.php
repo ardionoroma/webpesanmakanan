@@ -87,5 +87,9 @@
             $this->db->where('id_transaksi', $id);
             $this->db->update('pembeli', array('status' => $status));
         }
+
+        function hapus() {
+            $this->db->empty_table('pembeli');
+        }
 	}
 ?>

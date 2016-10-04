@@ -42,7 +42,7 @@
             <div class="navbar-header page-scroll">
 
                 <!--Icon di menubar kiri bakal kembali ke home-->
-                <a class="navbar-brand page-scroll" href="<?php echo base_url(); ?>koki">SMTI-08 RESTO</a>
+                <a class="navbar-brand page-scroll" href="#">SMTI-08 RESTO</a>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -54,70 +54,55 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">DAFTAR MENU YANG DIPESAN</h2>
+                    <h2 class="section-heading">DAFTAR PESANAN</h2>
                     <div class="row text-center">
                         <table style='width:80%'class='table table-bordered'>
                             <div>
                                 <tr class='danger'>
-                                    <th>No</th>
-                                    <th>Nomor Meja</th>
+                                    <th>No.</th>
                                     <th>Nama Menu</th>
-                                    <th>Gambar</th>
+                                    <th>Harga</th>
                                     <th>Jumlah</th>
-                                    <th>Status Pesanan</th>
-                                    <th>Tindakan</th>
+                                    <th>Subtotal</th>
                                 </tr>
                                 <?php
                                 if (!defined('BASEPATH')) {
                                     exit('No direct script access allowed');
                                 }
-                                $a = $this->db->query("SELECT * FROM pembeli WHERE status=0 OR status=1 OR status=2");
+                                $a = $this->db->query("SELECT * FROM pembeli WHERE status=5");
                                 $no_urut = 1;
+                                $total = 0;
                                 foreach($a->result_array() as $b){
+                                    $subtotal = 0;
                                 ?>
-                                    <tr>
-                                        <td><?php echo $no_urut ?>.</td>
-                                        <td><?php echo $b['no_meja'] ?></td>
-                                        <?php
-                                        if (!defined('BASEPATH')) {
-                                            exit('No direct script access allowed');
-                                        }
-                                        $teks = "SELECT * FROM menu WHERE id_menu='".$b['id_menu']."'";
-                                        $anu = $this->db->query($teks);
-                                        foreach($anu->result_array() as $c){?>
-                                            <td><?php echo $c['nama_menu']?></td>
-                                            <td><img src ="<?php echo base_url(); ?>assets/gambar/tabel/<?php echo $c['gambar'] ?>"/></td>
-                                        <?php } ?>
-                                        <td><?php echo $b['jumlah']?></td>
-                                        <?php if ($b['status'] == 0) { ?>
-                                            <td>Belum dimasak</td>
-                                        <?php } elseif ($b['status'] == 1) { ?>
-                                            <td>Siap dimasak</td>
-                                        <?php } elseif ($b['status'] == 2) { ?>
-                                            <td>Sedang dimasak</td>
-                                        <?php } elseif ($b['status'] == 3) { ?>
-                                            <td>Siap diantar</td>
-                                        <?php } elseif ($b['status'] == 4) { ?>
-                                            <td>Sedang diantar</td>
-                                        <?php } elseif ($b['status'] == 5) { ?>
-                                            <td>Selesai diantar</td>
-                                        <?php } ?>
-                                        <?php echo form_open('Koki/status', array('name' => 'status'))?>
-                                            <input type="hidden" name="id_transaksi" value="<?php echo $b['id_transaksi']?>" class="qty"/>
-                                            <input type="hidden" name="status" value="<?php echo $b['status']?>" class="qty"/>
-                                            <?php if ($b['status'] == 0) { ?>
-                                                <td><input type="submit" class="btn btn-primary" name="batal" value="Batalkan" style="background-color: #f44336"/><br><input type="submit" class="btn btn-primary" name="siap" value="Siap Dimasak"/></td>
-                                            <?php } elseif ($b['status'] == 1) { ?>
-                                                <td><input type="submit" class="btn btn-primary" name="sedang" value="Sedang Dimasak" style="background-color: #008CBA"/></td>
-                                            <?php } elseif ($b['status'] == 2) { ?>
-                                                <td><input type="submit" class="btn btn-primary" name="selesai" value="Selesai" style="background-color: #4CAF50"/></td>
-                                            <?php } ?>
-                                        <?php echo form_close(); ?>
-                                    </tr>
-                                    <?php $no_urut+=1;
-                                } ?>
+                                <tr>
+                                    <td><?php echo $no_urut ?>.</td>
+                                    <?php
+                                    if (!defined('BASEPATH')) {
+                                        exit('No direct script access allowed');
+                                    }
+                                    $teks = "SELECT * FROM menu WHERE id_menu='".$b['id_menu']."'";
+                                    $anu = $this->db->query($teks);
+                                    foreach($anu->result_array() as $c){?>
+                                        <td><?php echo $c['nama_menu']?></td>
+                                        <td>Rp <?php echo $c['harga']?>,-</td>
+                                    <?php } ?>
+                                    <td><?php echo $b['jumlah']?></td>
+                                    <?php $subtotal = $b['jumlah'] * $c['harga'];
+                                    $total = $total + $subtotal; ?>
+                                    <td>Rp <?php echo $subtotal ?>,-</td>
+                                </tr>
+                                <?php $no_urut+=1;
+                            } ?>
+                                <tr>
+                                    <td colspan="4" style="text-align: right">Total Pemesanan</td>
+                                    <td style="font-weight: bold">Rp <?php echo $total ?>,-</td>
+                                </tr>
                             </div>
                         </table>
+                        <?php echo form_open('Kasir/hapus', array('name' => 'hapus'))?>
+                            <input type="submit" class="page-scroll btn btn-xl" name="submit" value="Pembayaran Selesai"/>
+                        <?php echo form_close(); ?>
                     </div>
                 </div>
             </div>

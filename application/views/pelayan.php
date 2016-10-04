@@ -60,11 +60,12 @@
                             <div>
                                 <tr class='danger'>
                                     <th>No</th>
+                                    <th>Nomor Meja</th>
                                     <th>Nama Menu</th>
                                     <th>Gambar</th>
                                     <th>Jumlah</th>
                                     <th>Status Pesanan</th>
-                                    <th>Pembatalan</th>
+                                    <th>Tindakan</th>
                                 </tr>
                                 <?php
                                 if (!defined('BASEPATH')) {
@@ -75,7 +76,8 @@
                                 foreach($a->result_array() as $b){
                                 ?>
                                     <tr>
-                                        <td><?php echo $no_urut ?></td>
+                                        <td><?php echo $no_urut ?>.</td>
+                                        <td><?php echo $b['no_meja'] ?></td>
                                         <?php
                                         if (!defined('BASEPATH')) {
                                             exit('No direct script access allowed');
@@ -106,7 +108,7 @@
                                             <?php if ($b['status'] == 3) { ?>
                                                 <td><input type="submit" class="btn btn-primary" name="siap" value="Siap Mengantar"/></td>
                                             <?php } elseif ($b['status'] == 4) { ?>
-                                                <td><input type="submit" class="btn btn-primary" name="selesai" value="Selesai Mengantar"/></td>
+                                                <td><input type="submit" class="btn btn-primary" name="selesai" value="Selesai Mengantar" style="background-color: #4CAF50"/></td>
                                             <?php } ?>
                                         <?php echo form_close(); ?>
                                     </tr>
@@ -121,31 +123,7 @@
     </section>
 
     <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; SMTI-08 2016</span>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                        <li><a href="#">Privacy Policy</a>
-                        </li>
-                        <li><a href="#">Terms of Use</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <?php include 'footer.html';?>
     </footer>
 
     

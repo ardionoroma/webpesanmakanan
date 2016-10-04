@@ -42,7 +42,7 @@
             <div class="navbar-header page-scroll">
 
                 <!--Icon di menubar kiri bakal kembali ke home-->
-                <a class="navbar-brand page-scroll" href="<?php echo base_url(); ?>#services">SMTI-08 RESTO</a>
+                <a class="navbar-brand page-scroll" href="<?php echo base_url(); ?>">SMTI-08 RESTO</a>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -50,26 +50,11 @@
     </nav>
 
     <!-- Portfolio Grid Section -->
-    <section id="portfolio" class="bg-light-gray">
+    <section id="pemesanan" class="bg-light-gray">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">PESAN MAKANAN & MINUMAN</h2>
-
-                    <!--bikin form pilih makanan/minuman bertipe GET-->
-					<form method="get" action="">
-						<label>Nama Makanan/Minuman :</label><br>
-
-                        <!--dropdown listnya dinamain menu-->
-						<select type="text" name="menu" id="menu">
-							<option>---- Pilihan ----</option>
-							<option>Makanan</option>
-							<option>Minuman</option>
-						</select><br><br>
-
-                        <!--tombolnya bakal submit nilai yang terkandung di dropdown list-->
-						<button type="submit" class="btn btn-primary">Lihat Menu</button><br><br>
-					</form>
+					<label style="font-family:Montserrat">Terima kasih, transaksi Anda sedang kami proses. Pelayan kami akan mengantarkan bill ke meja Anda.</label><br>
                 </div>
             </div>
             <div class="row">

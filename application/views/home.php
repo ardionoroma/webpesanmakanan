@@ -89,7 +89,7 @@
                         foreach($a->result_array() as $b){
                         ?>
                             <tr>
-                                <td><?php echo $no_urut ?></td>
+                                <td><?php echo $no_urut ?>.</td>
                                 <?php
                                 if (!defined('BASEPATH')) {
                                     exit('No direct script access allowed');
@@ -102,19 +102,19 @@
                                 <?php } ?>
                                 <td><?php echo $b['jumlah']?></td>
                                 <?php if ($b['status'] == -1) { ?>
-                                    <td>Menu Kosong</td>
+                                    <td class="gray">Menu Kosong</td>
                                 <?php } elseif ($b['status'] == 0) { ?>
-                                    <td>Belum dimasak</td>
+                                    <td class="merah">Belum dimasak</td>
                                 <?php } elseif ($b['status'] == 1) { ?>
-                                    <td>Siap dimasak</td>
+                                    <td class="kuning">Siap dimasak</td>
                                 <?php } elseif ($b['status'] == 2) { ?>
-                                    <td>Sedang dimasak</td>
+                                    <td class="kuning">Sedang dimasak</td>
                                 <?php } elseif ($b['status'] == 3) { ?>
-                                    <td>Siap diantar</td>
+                                    <td class="kuning">Siap diantar</td>
                                 <?php } elseif ($b['status'] == 4) { ?>
-                                    <td>Sedang diantar</td>
+                                    <td class="kuning">Sedang diantar</td>
                                 <?php } elseif ($b['status'] == 5) { ?>
-                                    <td>Selesai diantar</td>
+                                    <td class="hijau">Selesai diantar</td>
                                 <?php } ?>
                                 <?php echo form_open('Pemesanan/batal', array('name' => 'batal'))?>
                                     <input type="hidden" name="id_transaksi" value="<?php echo $b['id_transaksi']?>" class="qty"/>
@@ -131,37 +131,13 @@
                         } ?>
                     </div>
                 </table><br><br>
-                <a href="<?php echo base_url(); ?>pemesanan" class="page-scroll btn btn-xl" style="margin-right: 25px">Tambah Pesanan</a><a href="<?php echo base_url(); ?>pemesanan" class="page-scroll btn btn-xl" style="margin-left: 25px">Finalisasi Transaksi</a>
+                <a href="<?php echo base_url(); ?>pemesanan" class="page-scroll btn btn-xl" style="margin-right: 25px">Tambah Pesanan</a><a href="<?php echo base_url(); ?>finalisasi" class="page-scroll btn btn-xl" style="margin-left: 25px">Finalisasi Transaksi</a>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; SMTI-08 2016</span>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                        <li><a href="#">Privacy Policy</a>
-                        </li>
-                        <li><a href="#">Terms of Use</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <?php include 'footer.html';?>
     </footer>
 
     <!-- jQuery, panggil jQuery di assets -->
