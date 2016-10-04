@@ -82,5 +82,10 @@
             $this->db->where('id_transaksi', $id);
             $this->db->delete('pembeli'); 
         }
+
+        function row_update($id, $status) {
+            $this->db->where('id_transaksi', $id);
+            $this->db->update('pembeli', array('status' => $status));
+        }
 	}
 ?>

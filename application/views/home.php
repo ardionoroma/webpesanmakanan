@@ -101,7 +101,9 @@
                                     <td><img src ="<?php echo base_url(); ?>assets/gambar/tabel/<?php echo $c['gambar'] ?>"/></td>
                                 <?php } ?>
                                 <td><?php echo $b['jumlah']?></td>
-                                <?php if ($b['status'] == 0) { ?>
+                                <?php if ($b['status'] == -1) { ?>
+                                    <td>Menu Kosong</td>
+                                <?php } elseif ($b['status'] == 0) { ?>
                                     <td>Belum dimasak</td>
                                 <?php } elseif ($b['status'] == 1) { ?>
                                     <td>Siap dimasak</td>
@@ -116,7 +118,9 @@
                                 <?php } ?>
                                 <?php echo form_open('Pemesanan/batal', array('name' => 'batal'))?>
                                     <input type="hidden" name="id_transaksi" value="<?php echo $b['id_transaksi']?>" class="qty"/>
-                                    <?php if ($b['status'] == 0) { ?>
+                                    <?php if ($b['status'] == -1) { ?>
+                                        <td><a href="<?php echo base_url(); ?>pemesanan" class="btn btn-primary">Pilih Menu Lain</button></td>
+                                    <?php } elseif ($b['status'] == 0) { ?>
                                         <td><input type="submit" class="btn btn-primary" name="submit" value="Batalkan"/></td>
                                     <?php } else { ?>
                                         <td>Tidak dapat dibatalkan</td>
@@ -127,7 +131,7 @@
                         } ?>
                     </div>
                 </table><br><br>
-                <a href="<?php echo base_url(); ?>pemesanan" class="page-scroll btn btn-xl">Tambah Pesanan</a><a href="<?php echo base_url(); ?>pemesanan" class="page-scroll btn btn-xl">Finalisasi Transaksi</a>
+                <a href="<?php echo base_url(); ?>pemesanan" class="page-scroll btn btn-xl" style="margin-right: 25px">Tambah Pesanan</a><a href="<?php echo base_url(); ?>pemesanan" class="page-scroll btn btn-xl" style="margin-left: 25px">Finalisasi Transaksi</a>
             </div>
         </div>
     </section>
